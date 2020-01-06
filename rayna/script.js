@@ -1,7 +1,8 @@
 $(document).ready(function(){
     console.log ("jquery is loaded!")
-    var URL = `https://app.ticketmaster.com/discovery/v2/events.json?size=1&apikey=${API_KEY}`
-    $.ajax({
+    function ticketmaster(size){
+        var URL = `https://app.ticketmaster.com/discovery/v2/events.json?size=${size}&apikey=${API_KEY}`
+        $.ajax({
         type:"GET",
         url:URL,
         async:true,
@@ -16,4 +17,7 @@ $(document).ready(function(){
             // This time, we do not end up here!
                  }
       });
+    }
+    var otherSize = prompt("how many events do you want to search for?")
+    ticketmaster(otherSize);
 }) 
