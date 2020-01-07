@@ -1,16 +1,7 @@
-// First Page Variables
+// Variables
 var h1 = $("h1");
-var q1 = $(".question1");
-var outBtn = $(".out");
-var inBtn = $(".in");
 var container = $('.container');
-// Second Page Variables:
-// In Variables:
-var q2i = $(".question2i");
-var movieForm = $("form")
-// Out Variables:
-var q2o = $(".question2o");
-
+var eventForm = $("form")
 
 // Time Variables:
 var now;
@@ -18,73 +9,30 @@ var nowDateTime;
 var selectedDate;
 
 
-
 // Event Listeners
-outBtn.on("click", function(event){
-    event.preventDefault();
-    var situation = $(this).attr("data-choice") + 1;
-    renderPage(situation);
-});
-inBtn.on("click", function(event){
-    event.preventDefault();
-    var situation = $(this).attr("data-choice") + 1;
-    renderPage(situation);
-});
-
-movieForm.on("submit", function(event){
+eventForm.on("submit", function(event){
     event.preventDefault();
     console.log("Submitted the movie");
-})
-// Ajax call for an Out event here
-q2o.on("click", "button", function(event){
-    event.preventDefault();
-    var day = $(this).val();
-    console.log(day);
-    var situation = "daySelected";
-    renderPage(situation);
-    dayDisplay(day);
 });
 // Functions
 function renderPage(situation){
     switch(situation){
         case "start":
             console.log("start")
-            h1.text("Do you want to:")
-            q1.attr("style", "display: box"); // Displaying
-            q2i.css("display", "none");
-            q2o.css("display", "none");
-            break;
-
-        case "out1":
-            console.log("out1")
-            h1.text("What day are you planning for?")
-            q1.css("display", "none");
-            q2i.css("display", "none");
-            q2o.attr("style", "display: box"); // Displaying
-            break;
-
-        case "daySelected":
-            console.log("daySelected")
-            h1.text("Things to do:");
-            q1.css("display", "none");
-            q2i.css("display", "none");
-            q2o.css("display", "none");
-            break;
-
-        case "in1":
-            console.log("in1")
-            h1.text("What movie do you feel like watching?")
-            q1.css("display", "none");
-            q2i.attr("style", "display: box"); // Displaying
-            q2o.css("display", "none");
+            h1.text("Plan a date")
+            // These currently don't exist but they will in the future
+            // q1.attr("style", "display: box"); // Displaying
+            // q2i.css("display", "none");
+            // q2o.css("display", "none");
             break;
 
         default:
             console.log("Default")
-            h1.text("Do you want to:")
-            q1.attr("style", "display: box"); // Displaying
-            q2i.css("display", "none");
-            q2o.css("display", "none");
+            h1.text("Plan a date")
+            // These currently don't exist but they will in the future
+            // q1.attr("style", "display: box"); // Displaying
+            // q2i.css("display", "none");
+            // q2o.css("display", "none");
             break;
     }
 
@@ -118,3 +66,62 @@ function init(){
 };
 
 init();
+
+
+function getEvents(page) {
+
+    $('#events-panel').show();
+    $('#attraction-panel').hide();
+  
+    if (page < 0) {
+      page = 0;
+      return;
+    }
+    if (page > 0) {
+      if (page > getEvents.json.page.totalPages-1) {
+        page=0;
+      }
+    }
+    
+    $.ajax({
+      type:"GET",
+      url:"https://app.ticketmaster.com/discovery/v2/events.json?apikey=pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz&size=4&page="+page,
+      async:true,
+      dataType: "json",
+      success: function(json) {
+            getEvents.json = json;
+                  showEvents(json);
+               },
+      error: function(xhr, status, err) {
+                  console.log(err);
+               }
+    });
+  }
+
+function showEvents(json) {
+    var items = $('#events .list-group-item');
+    items.hide();
+    var events = json._embedded.events;
+    var item = items.first();
+    for (var i=0;i<events.length;i++) {
+        item.children('.list-group-item-heading').text(events[i].name);
+        item.children('.list-group-item-text').text(events[i].dates.start.localDate);
+        try {
+        item.children('.venue').text(events[i]._embedded.venues[0].name + " in " + events[i]._embedded.venues[0].city.name);
+        } catch (err) {
+        console.log(err);
+        }
+        item.show();
+        item.off("click");
+        item.click(events[i], function(eventObject) {
+        console.log(eventObject.data);
+        try {
+            console.log(eventObject.data._embedded.attractions[0].id);
+            // getAttraction(eventObject.data._embedded.attractions[0].id);
+        } catch (err) {
+        console.log(err);
+        }
+        });
+        item=item.next();
+    }
+}
