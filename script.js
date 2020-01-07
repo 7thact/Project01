@@ -11,6 +11,14 @@ var movieForm = $("form")
 // Out Variables:
 var q2o = $(".question2o");
 
+
+// Time Variables:
+var now;
+var nowDateTime;
+var selectedDate;
+
+
+
 // Event Listeners
 outBtn.on("click", function(event){
     event.preventDefault();
@@ -95,8 +103,18 @@ function dayDisplay(date){
     a2o.append(exampleList);
 }
 
+function momentConfig(){
+    now = moment();
+    nowDateTime = now.format("LLLL");
+    // Find out what format the query takes
+    console.log(nowDateTime);
+    // currentHour = now.format("kk")
+    // now.format("ddd, Do MMMM, YYYY"));
+}
+
 function init(){
     renderPage("start");
+    momentConfig();
 };
 
 init();
