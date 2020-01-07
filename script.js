@@ -8,11 +8,23 @@ var now;
 var nowDateTime;
 var selectedDate;
 
+var ticketMasterAPIKey = 'OIxE4IaaAdswnN3Q9eeEnasXqbbJzEnG';
+var page = 0;
+var size = 4; // Make this dynamic
+
+// Implement prev and next button
 
 // Event Listeners
+// API
 eventForm.on("submit", function(event){
     event.preventDefault();
-    console.log("Submitted the movie");
+    var price = $("#price").val();
+    var queryDate = $("#date").val();
+    var segment = $("#segment").val();
+    getEvents(page);
+    console.log(price);
+    console.log(segment);
+    console.log(queryDate);
 });
 // Functions
 function renderPage(situation){
@@ -85,7 +97,7 @@ function getEvents(page) {
     
     $.ajax({
       type:"GET",
-      url:"https://app.ticketmaster.com/discovery/v2/events.json?apikey=pLOeuGq2JL05uEGrZG7DuGWu6sh2OnMz&size=4&page="+page,
+      url:`https://app.ticketmaster.com/discovery/v2/events.json?apikey=${ticketMasterAPIKey}&size=${size}&page=${page}`,
       async:true,
       dataType: "json",
       success: function(json) {
