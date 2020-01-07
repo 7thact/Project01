@@ -1,0 +1,38 @@
+.out, .in {
+    align-items: center;
+    background-color: #1E88E5;
+    border-radius: 100%;
+    box-sizing: border-box;
+    display: flex;
+    height: 30rem;
+    justify-content: center;
+    text-align: center;
+}
+.in {
+    background-color: #E53935;
+}
+.columns > h3{
+    color: white;
+}
+
+.columns, .column{
+    margin-left:0;
+}
+
+h1 {
+    text-align: center;
+}
+
+.row > .row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+
+/* Rounded switch
+<label class="switch">
+  <input type="checkbox">
+  <span class="slider round"></span>
+</label> */
