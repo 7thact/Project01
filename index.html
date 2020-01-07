@@ -1,56 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <!-- Basic Page Needs
+    <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Your page title here :)</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <title>Your page title here :)</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <!-- Mobile Specific Metas
+    <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- FONT
+    <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 
-  <!-- CSS
+    <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-  <link rel="stylesheet" href="css/ourstyle.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/ourstyle.css">
     <!-- JAVASCRIPT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
-  <!-- Favicon
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon.png">
 
 </head>
+
 <body>
 
-  <!-- Primary Page Layout
+    <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container display-flex">
-    <div class="row header">
-        <div class="12 columns">
-            <h1>Do you want to:</h1>
-        </div>
-    </div>
-    <div class="row question1">
+    <div class="container display-flex">
+        <div class="row header">
+            <div class="12 columns">
+                <div id='events-panel' class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Events</h3>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div id="events" class="list-group">
+                      <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">Event title</h4>
+                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p class="venue"></p>
+                      </a>
+                      <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">Event title</h4>
+                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p class="venue"></p>
+                      </a>
+                      <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">Event title</h4>
+                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p class="venue"></p>
+                      </a>
+                      <a href="#" class="list-group-item">
+                        <h4 class="list-group-item-heading">Event title</h4>
+                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <p class="venue"></p>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="panel-footer">
+                    <nav>
+                      <ul class="pager">
+                        <li id="prev" class="previous"><a href="#"><span aria-hidden="true">&larr;</span></a></li>
+                        <li id="next" class="next"><a href="#"><span aria-hidden="true">&rarr;</span></a></li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+        <!-- <div class="row question1">
         <div class="six columns out" data-choice="out">
             <h3>Go Out?</h3>
-        </div>
-        <div class="six columns in" data-choice="in">
-            <h3>Stay In?</h3>
-        </div>
-    </div>
+        </div> -->
+        <!-- <div class="six columns in" data-choice="in">
+            <h3>Stay In?</h3> -->
+        <!-- </div> -->
+    <!-- </div>
     <div class="row question2o">
         <div class="row">
             <div class="four columns"><button value="0">Today !!</button></div>
@@ -61,7 +96,7 @@
             <div class="four columns"><button value="3">Today+3</button value="0"></div>
             <div class="four columns"><button value="4">Today+4</button value="0"></div>
             <div class="four columns"><button value="5">Today+5</button value="0"></div>
-            <div class="four columns"><button value="6">Today+6</button value="0"></div> 
+            <div class="four columns"><button value="6">Today+6</button value="0"></div>
         </div>
     </div>
     <div class="row question2i">
@@ -70,29 +105,30 @@
             <form action="/action_page.php">
                 <label for="title">Title</label>
                 <input type="text" id="title" name="title" placeholder="Movie Title">
-                
+
                 <label for="genre">Genre</label>
                 <input type="text" id="genre" name="genre" placeholder="Movie Genre">
-                
+
                 <!-- <label for="country">Country</label>
                 <select id="country" name="country">
                     <option value="australia">Australia</option>
                     <option value="canada">Canada</option>
                     <option value="usa">USA</option>
                 </select> -->
-                
+
                 <input type="submit" value="Submit">
             </form>
         </div>
     </div>
-  </div>
+    </div>
 
-<!-- <div class="one-half column" style="margin-top: 25%">
+    <!-- <div class="one-half column" style="margin-top: 25%">
   <h4>Basic Page</h4>
   <p>This index.html page is a placeholder with the CSS, font and favicon. It's just waiting for you to add some content! If you need some help hit up the <a href="http://www.getskeleton.com">Skeleton documentation</a>.</p>
-</div> -->
-<script src="script.js"></script>
-<!-- End Document
+</div> --> -->
+    <script src="script.js"></script>
+    <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
+
 </html>
