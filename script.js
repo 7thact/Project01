@@ -19,6 +19,8 @@ var startDate = 0;
 var ticketMasterAPIKey = 'OIxE4IaaAdswnN3Q9eeEnasXqbbJzEnG';
 var page = 0;
 var size = 10; // Make this dynamic
+var city = "denver";
+var storedEvents = {};
 
 
 // Event Listeners
@@ -127,25 +129,24 @@ function getEvents(page) {
     });
   }
   
+
   function showEvents(json) {
-      var items = $('#events .list-group-item'); // Targeting our HTML
-      items.hide();
-      var events = json._embedded.events; // Events from the call
-      console.log("In showEvents, here are the json._embedded.events:")
-      console.log(events);
-      var item = items.first();
+    var items = $('#events .list-group-item'); // Targeting our HTML
+    var events = json._embedded.events; // Events from the call
+    items.hide();
+
     for (var i = 0; i < events.length; i++) {
         var item = items[i];
-        $(item).children('.list-group-item-heading').text(events[i].name);
-        $(item).children('.list-group-item-text').text(events[i].dates.start.localDate);
-        try {
-            $(item).children('.venue').text(events[i]._embedded.venues[0].name + " in " + events[i]._embedded.venues[0].city.name);
-        } catch (err) {
-            console.log(err);
-        }
-        $(item).show();
+        var event = events[i];
+        var storedEvent = storedEventsFiller(event);
+        // Display
+        if (i < items.length){
+            renderTile(storedEvent, item);
+
+        };
         $(item).off("click");
         // Clicking functionality for each of the items
+        // I think I could replace this with event delegation
         $(item).click(events[i], function(eventObject) {
 
             console.log(eventObject.data);
@@ -156,6 +157,8 @@ function getEvents(page) {
                 console.log(err);
             }
         });
+
+
     };
 };
 
@@ -172,6 +175,7 @@ function queryURLFiller(typeEvent, startDate, price, size, page){
     // queryURL += `&startDateTime=${}`; //&endDateTime=${};
     // queryURL += `&endDateTime=${}`;
     // };
+    queryURL += `&city=${city}`;
     queryURL += `&size=${size}&page=${page}`;
     console.log(queryURL);
     return queryURL;
@@ -180,9 +184,9 @@ function queryURLFiller(typeEvent, startDate, price, size, page){
 
 function pageTurn(increment, page){
     // Fix this. Make it so the page turn only works when there are events populated
-    // if (getEvents.json === undefined){
-    //     return;
-    // };
+    if (getEvents.json === undefined){
+        return;
+    };
     page += increment;
     if (page < 0) {
         page = getEvents.json.page.totalPages - 1;
@@ -194,3 +198,57 @@ function pageTurn(increment, page){
     return page;
 };
 
+
+// REFACTORING   function showEvents(json) {
+
+function storedEventsFiller(event){
+    var itemHeadingText = event.name;
+    var itemDateText = event.dates.start.localDate;
+    var itemVenueText = "";
+    try {
+        itemVenueText = event._embedded.venues[0].name + " in " + event._embedded.venues[0].city.name;
+    } catch (err) {
+        console.log(err);
+    }
+    var storedEvent = {
+        "heading": itemHeadingText,
+        "date": itemDateText,
+        "venue": itemVenueText
+    };
+    return storedEvent;
+};
+
+function renderTile(storedEvent, item){
+    $(item).children('.list-group-item-heading').text(storedEvent.heading);
+    $(item).children('.list-group-item-text').text(storedEvent.date);
+    $(item).children('.venue').text(storedEvent.venue);
+    $(item).show();
+};
+
+
+
+
+
+//     // Need to change these indices when I use the page button
+//     var indexStart = page * items.length;
+//     var indexEnd = indexStart + items.length;
+//     if (i < items.length){
+
+//     }
+
+//     // Non-Display
+//     $()
+//     $(item).show();
+//     $(item).off("click");
+//     // Clicking functionality for each of the items
+//     $(item).click(events[i], function(eventObject) {
+
+//         console.log(eventObject.data);
+//         try {
+//             console.log(eventObject.data._embedded.attractions[0].id);
+//             // getAttraction(eventObject.data._embedded.attractions[0].id);
+//         } catch (err) {
+//             console.log(err);
+//         }
+//     });
+// };
