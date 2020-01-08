@@ -158,6 +158,7 @@ function getEvents(page) {
             }
         });
 
+        storedEvents[i] = storedEvent;
 
     };
 };
