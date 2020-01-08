@@ -5,6 +5,7 @@ var eventForm = $("form")
 
 // Time Variables:
 var now;
+var nowUTC;
 var nowDateTime;
 var selectedDate;
 
@@ -86,6 +87,7 @@ function dayDisplay(date){
 
 function momentConfig(){
     now = moment();
+    nowUTC = now.utc(String).format();
     nowDateTime = now.format("LLLL");
     // Find out what format the query takes
     console.log(nowDateTime);
@@ -106,7 +108,7 @@ function getEvents(page) {
     $('#events-panel').show();
     $('#attraction-panel').hide();
 
-    queryURL = queryURLFiller(typeEvent, startDate, price, size, page);
+    queryURL = queryURLFiller(typeEvent, queryDate, price, size, page);
 
 
     $.ajax({
@@ -164,11 +166,14 @@ function queryURLFiller(typeEvent, startDate, price, size, page){
     if (typeEvent !== "undefined"){
         queryURL += `&classificationName=${typeEvent}`
     };
-    //if (startDate !== 0){
-    // queryURL += `&startDateTime=${startDate}`; //&endDateTime=${}
-    // Figure out how this works YYYY-MM-DD`
-    //}
+    // if (startDate !== "0"){
+    // var arr = ["2020-03-03","2020-05-20"]
+    // "2020-01-12T23:40:00Z"
+    // queryURL += `&startDateTime=${}`; //&endDateTime=${};
+    // queryURL += `&endDateTime=${}`;
+    // };
     queryURL += `&size=${size}&page=${page}`;
+    console.log(queryURL);
     return queryURL;
 };
 
