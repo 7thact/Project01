@@ -3,169 +3,224 @@
 
 <head>
 
-  <!-- Basic Page Needs
+    <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Your page title here :)</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <title>Bored?</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <!-- Mobile Specific Metas
+    <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- FONT
+    <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 
-  <!-- CSS
+    <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
-  <link rel="stylesheet" href="css/ourstyle.css">
-  <!-- JAVASCRIPT
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/ourstyle.css">
+    <!-- JAVASCRIPT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-  <!-- Favicon
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon.png">
 
 </head>
 
 <body>
+    <Header>
+        <h2>Bored in Denver? Search for an Event!</h2>
+    </Header>
+    <div class="row formRow">
+        <div class="four columns searchForm">
+            <form action="/action_page.php">
+                <label for="price">Price</label>
+                <input type="text" id="price" name="price" placeholder="Maximum Price">
 
-  <!-- Primary Page Layout
+                <label for="date">Date</label>
+                <input type="text" id="date" name="date" placeholder="MM-DD-YYYY">
+
+                <label for="segment">Event Type</label>
+                <select id="segment" name="segment">
+                    <option value="music">music</option>
+                    <option value="sports">sports</option>
+                    <option value="film">film</option>
+                    <option value="family">family</option>
+                    <option value="miscellaneous">miscellaneous</option>
+                </select>
+
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <div class="four columns calendar">
+            <div class="calender">
+                <iframe
+                    src="https://calendar.google.com/calendar/embed?height=300&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=America%2FDenver&amp;src=ZmI3cmI1YnAzc2xlMjdxMmhsZTVmYTI2ZGtAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23B08B59&amp;color=%23227F63&amp;title=Date%20Night%20"
+                    style="border:solid 1px #777" width="300" height="300" frameborder="0" scrolling="no">
+                </iframe>
+            </div>
+        </div>
+    </div>
+    <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <div class="container display-flex">
         <div class="row header">
             <div class="twelve columns">
                 <div id='events-panel' class="panel">
                     <div class="panel-heading">
-                        <h4 class="panel-title">Events</h4>
+                        <h4 class="panel-title"></h4>
                     </div>
                 </div>
                 <div class="panel-body">
                     <div id="events" class="list-group">
                         <div class="row">
-                            <div class="6 columns"></div>
-                            <div class="6 columns"></div>
-                            <div class="eventItems">
-                                <a href="#" class="list-group-item">
-                                    <h5 class="list-group-item-heading">Event title</h5>
-                                    <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur
-                                        adipiscing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <p class="venue"></p>
-                                </a>
+                            <div class="six columns">
+                                <div class="eventItems">
+                                    <a href="#" class="list-group-item">
+                                        <h5 class="list-group-item-heading">Event title</h5>
+                                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit,
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p class="venue"></p>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="eventItems">
-                                <a href="#" class="list-group-item">
-                                    <h5 class="list-group-item-heading">Event title</h5>
-                                    <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur
-                                        adipiscing elit,
-                                        sed
-                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <p class="venue"></p>
-                                </a>
+                            <div class="six columns">
+                                <div class="eventItems">
+                                    <a href="#" class="list-group-item">
+                                        <h5 class="list-group-item-heading">Event title</h5>
+                                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit,
+                                            sed
+                                            do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p class="venue"></p>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="eventItems">
-                                <a href="#" class="list-group-item">
-                                    <h5 class="list-group-item-heading">Event title</h5>
-                                    <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                        elit,
-                                        sed
-                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <p class="venue"></p>
-                                </a>
+                        </div>
+                        <div class="row">
+                            <div class="six columns">
+                                <div class="eventItems">
+                                    <a href="#" class="list-group-item">
+                                        <h5 class="list-group-item-heading">Event title</h5>
+                                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit,
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p class="venue"></p>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="eventItems">
-                                <a href="#" class="list-group-item">
-                                    <h5 class="list-group-item-heading">Event title</h5>
-                                    <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                        elit,
-                                        sed
-                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <p class="venue"></p>
-                                </a>
+                            <div class="six columns">
+                                <div class="eventItems">
+                                    <a href="#" class="list-group-item">
+                                        <h5 class="list-group-item-heading">Event title</h5>
+                                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit,
+                                            sed
+                                            do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p class="venue"></p>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="eventItems">
-                                <a href="#" class="list-group-item">
-                                    <h5 class="list-group-item-heading">Event title</h5>
-                                    <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                        elit,
-                                        sed
-                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <p class="venue"></p>
-                                </a>
+                        </div>
+                        <div class="row">
+                            <div class="six columns">
+                                <div class="eventItems">
+                                    <a href="#" class="list-group-item">
+                                        <h5 class="list-group-item-heading">Event title</h5>
+                                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit,
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p class="venue"></p>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="eventItems">
-                                <a href="#" class="list-group-item">
-                                    <h5 class="list-group-item-heading">Event title</h5>
-                                    <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                        elit,
-                                        sed
-                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <p class="venue"></p>
-                                </a>
+                            <div class="six columns">
+                                <div class="eventItems">
+                                    <a href="#" class="list-group-item">
+                                        <h5 class="list-group-item-heading">Event title</h5>
+                                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit,
+                                            sed
+                                            do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p class="venue"></p>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="eventItems">
-                                <a href="#" class="list-group-item">
-                                    <h5 class="list-group-item-heading">Event title</h5>
-                                    <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                        elit,
-                                        sed
-                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <p class="venue"></p>
-                                </a>
+                        </div>
+                        <div class="row">
+                            <div class="six columns">
+                                <div class="eventItems">
+                                    <a href="#" class="list-group-item">
+                                        <h5 class="list-group-item-heading">Event title</h5>
+                                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit,
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p class="venue"></p>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="eventItems">
-                                <a href="#" class="list-group-item">
-                                    <h5 class="list-group-item-heading">Event title</h5>
-                                    <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                        elit,
-                                        sed
-                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <p class="venue"></p>
-                                </a>
+                            <div class="six columns">
+                                <div class="eventItems">
+                                    <a href="#" class="list-group-item">
+                                        <h5 class="list-group-item-heading">Event title</h5>
+                                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit,
+                                            sed
+                                            do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p class="venue"></p>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="eventItems">
-                                <a href="#" class="list-group-item">
-                                    <h5 class="list-group-item-heading">Event title</h5>
-                                    <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                        elit,
-                                        sed
-                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <p class="venue"></p>
-                                </a>
+                        </div>
+                        <div class="row">
+                            <div class="six columns">
+                                <div class="eventItems">
+                                    <a href="#" class="list-group-item">
+                                        <h5 class="list-group-item-heading">Event title</h5>
+                                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit,
+                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p class="venue"></p>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="eventItems">
-                                <a href="#" class="list-group-item">
-                                    <h5 class="list-group-item-heading">Event title</h5>
-                                    <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                        elit,
-                                        sed
-                                        do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <p class="venue"></p>
-                                </a>
+                            <div class="six columns">
+                                <div class="eventItems">
+                                    <a href="#" class="list-group-item">
+                                        <h5 class="list-group-item-heading">Event title</h5>
+                                        <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur
+                                            adipiscing elit,
+                                            sed
+                                            do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p class="venue"></p>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row ">
-                        <div class="twelve columns ">
-                            <div class="navButtons">
-                                <nav>
-                                    <input type="submit" value="Prev" id="prev" class="previous">
-                                    <input type="submit" value="Next" id="next" class="next">
-                                </nav>
-                            </div>
+                </div>
+                <div class="row ">
+                    <div class="twelve columns ">
+                        <div class="navButtons">
+                            <nav>
+                                <input class="button-primary" type="submit" value="Prev" id="prev" class="previous">
+                                <input class="button-primary" type="submit" value="Next" id="next" class="next">
+                            </nav>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    </div>
+    <!-- <div class="row">
         <div class="twelve columns"> 
             <form action="/action_page.php">
                 <label for="price">Price</label>
@@ -187,11 +242,11 @@
                     <input type="submit" value="Submit">
                 </form>
             </div>
-        </div>
+        </div> -->
 
 
-        <script src="lib/moment/moment.min.js"></script>
-        <script src="script.js"></script>
+    <script src="lib/moment/moment.min.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
