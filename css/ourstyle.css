@@ -30,7 +30,34 @@ h1 {
     flex-wrap: wrap;
 }
 
+.container {
+    margin: 20px auto;
+}
 
+.navButtons {
+    display: flex;
+    justify-content: center;
+}
+
+.eventItems {
+    border-style: solid;
+    border-color: lightgrey;
+    padding: 20px;
+    margin: 20px;
+   }
+
+.panel {
+    background-color: lightskyblue;
+    color: rgb(23, 87, 170);
+    text-align: center;
+}
+
+/* @media screen and (min-width: 480px) {
+    body {
+      background-color: lightgreen;
+    }
+  } */
+  
 /* Rounded switch
 <label class="switch">
   <input type="checkbox">
