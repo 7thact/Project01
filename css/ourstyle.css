@@ -11,16 +11,34 @@
 .in {
     background-color: #E53935;
 }
-.columns > h3{
-    color: white;
+.columns {
+    display: flex;
+    justify-content: space-between;
 }
 
 .columns, .column{
     margin-left:0;
 }
 
-h1 {
+h2 {
     text-align: center;
+    background-color: lightskyblue;
+    border-radius: 4px;
+}
+
+.searchForm {
+    display: flex;
+    justify-content: center;
+}
+
+.calendar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.formRow {
+    display: flex;
+    justify-content: space-between;
 }
 
 .row > .row{
@@ -50,6 +68,7 @@ h1 {
     background-color: lightskyblue;
     color: rgb(23, 87, 170);
     text-align: center;
+    padding: 20px;
 }
 
 /* @media screen and (min-width: 480px) {
