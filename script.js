@@ -17,20 +17,25 @@ var queryDate = $("#date").val();
 var startDate = 0;
 var ticketMasterAPIKey = 'OIxE4IaaAdswnN3Q9eeEnasXqbbJzEnG';
 var page = 0;
-var size = 4; // Make this dynamic
+var size = 10; // Make this dynamic
+
 
 // Event Listeners
 nextBtn.on("click", function(e){
     e.preventDefault();
     page = pageTurn(1, page);
     // Currently run another
+
     // getEvents(page);
+
     console.log(page);
 })
 prevBtn.on("click", function(e){
     e.preventDefault();
     page = pageTurn(-1, page);
+
     // getEvents(page);
+
     console.log(page);
 });
 // API
@@ -128,17 +133,19 @@ function getEvents(page) {
       console.log(events);
       var item = items.first();
     for (var i = 0; i < events.length; i++) {
-        item.children('.list-group-item-heading').text(events[i].name);
-        item.children('.list-group-item-text').text(events[i].dates.start.localDate);
+        var item = items[i];
+        $(item).children('.list-group-item-heading').text(events[i].name);
+        $(item).children('.list-group-item-text').text(events[i].dates.start.localDate);
         try {
-            item.children('.venue').text(events[i]._embedded.venues[0].name + " in " + events[i]._embedded.venues[0].city.name);
+            $(item).children('.venue').text(events[i]._embedded.venues[0].name + " in " + events[i]._embedded.venues[0].city.name);
         } catch (err) {
             console.log(err);
         }
-        item.show();
-        item.off("click");
+        $(item).show();
+        $(item).off("click");
         // Clicking functionality for each of the items
-        item.click(events[i], function(eventObject) {
+        $(item).click(events[i], function(eventObject) {
+
             console.log(eventObject.data);
             try {
                 console.log(eventObject.data._embedded.attractions[0].id);
@@ -147,9 +154,8 @@ function getEvents(page) {
                 console.log(err);
             }
         });
-    item = item.next();
-    }
-}
+
+
 
 function queryURLFiller(typeEvent, startDate, price, size, page){
     var queryURL = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${ticketMasterAPIKey}`
