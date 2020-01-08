@@ -154,6 +154,8 @@ function getEvents(page) {
                 console.log(err);
             }
         });
+    };
+};
 
 
 
@@ -185,5 +187,5 @@ function pageTurn(increment, page){
         page = 0;
     }
     return page;
-}
+};
 
