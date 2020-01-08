@@ -19,18 +19,23 @@ var ticketMasterAPIKey = 'OIxE4IaaAdswnN3Q9eeEnasXqbbJzEnG';
 var page = 0;
 var size = 10; // Make this dynamic
 
+
 // Event Listeners
 nextBtn.on("click", function(e){
     e.preventDefault();
     page = pageTurn(1, page);
     // Currently run another
-    getEvents(page);
+
+    // getEvents(page);
+
     console.log(page);
 })
 prevBtn.on("click", function(e){
     e.preventDefault();
     page = pageTurn(-1, page);
-    getEvents(page);
+
+    // getEvents(page);
+
     console.log(page);
 });
 // API
@@ -140,6 +145,7 @@ function getEvents(page) {
         $(item).off("click");
         // Clicking functionality for each of the items
         $(item).click(events[i], function(eventObject) {
+
             console.log(eventObject.data);
             try {
                 console.log(eventObject.data._embedded.attractions[0].id);
@@ -148,8 +154,8 @@ function getEvents(page) {
                 console.log(err);
             }
         });
-    }
-}
+
+
 
 function queryURLFiller(typeEvent, startDate, price, size, page){
     var queryURL = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=${ticketMasterAPIKey}`
@@ -180,3 +186,4 @@ function pageTurn(increment, page){
     }
     return page;
 }
+
