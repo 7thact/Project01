@@ -69,13 +69,13 @@ h2 {
 
 
 
-/* .test3 {
+.test3 {
     display: -webkit-flex;
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    width: 100%;
-} */
+    width: 100%;    
+}
 
 /* .test1 {
     display: flex;
