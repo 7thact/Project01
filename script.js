@@ -19,8 +19,8 @@ var startDate = 0;
 var ticketMasterAPIKey = 'OIxE4IaaAdswnN3Q9eeEnasXqbbJzEnG';
 var page = 0;
 var size = 10; // Make this dynamic
-var city = "denver";
 var storedEvents = {};
+var city = "denver";
 
 
 // Event Listeners
@@ -51,28 +51,6 @@ eventForm.on("submit", function(event){
     getEvents(page);
 });
 // Functions
-function renderPage(situation){
-    switch(situation){
-        case "start":
-            console.log("start")
-            h1.text("Plan a date")
-            // These currently don't exist but they will in the future
-            // q1.attr("style", "display: box"); // Displaying
-            // q2i.css("display", "none");
-            // q2o.css("display", "none");
-            break;
-
-        default:
-            console.log("Default")
-            h1.text("Plan a date")
-            // These currently don't exist but they will in the future
-            // q1.attr("style", "display: box"); // Displaying
-            // q2i.css("display", "none");
-            // q2o.css("display", "none");
-            break;
-    }
-
-}
 // This function is going to do the heavy lifting with displaying the AJAX call
 function dayDisplay(date){
     // I could only get this to work by creating a new div. I would prefer to create this div outside of this dayDisplay, so we can erase it.
@@ -98,7 +76,8 @@ function momentConfig(){
 }
 
 function init(){
-    renderPage("start");
+    h1.text("Plan a date")
+    container.hide();
     momentConfig();
 };
 
@@ -109,7 +88,7 @@ function getEvents(page) {
 
     $('#events-panel').show();
     $('#attraction-panel').hide();
-
+    // var latlong = position.coords.latitude + "," + position.coords.longitude;
     queryURL = queryURLFiller(typeEvent, queryDate, price, size, page);
 
 
@@ -130,11 +109,11 @@ function getEvents(page) {
   }
   
 
-  function showEvents(json) {
+function showEvents(json) {
     var items = $('#events .list-group-item'); // Targeting our HTML
     var events = json._embedded.events; // Events from the call
-    items.hide();
-
+    container.show();
+    var counter = 0
     for (var i = 0; i < events.length; i++) {
         var item = items[i];
         var event = events[i];
@@ -149,19 +128,11 @@ function getEvents(page) {
         // console.log(event.name)
         storedEvents[i] = storedEvent;
         storedEvents[i].event =  event; // Incase we need more information
-        storedEvents[i].attraction = event._embedded.attractions[0];
-        // ATTRACTIONS OBJECT INFORMATION
-        // name: "Eagles"
-        // type: "attraction"
-        // id: "K8vZ9171ob7"
-        // test: false
-        // url: "https://www.ticketmaster.com/eagles-tickets/artist/734977"
-        // locale: "en-us"
-        // externalLinks: {twitter: Array(1), itunes: Array(1), lastfm: Array(1), wiki: Array(1), facebook: Array(1), …}
-        // images: (10) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-        // classifications: [{…}]
-        // upcomingEvents: {_total: 29, tmr: 2, ticketmaster: 27}
-        // _links: {self: {…}}
+        try {
+            storedEvents[i].attraction = event._embedded.attractions[0];
+        } catch (err) {
+            storedEvents[i].attraction = "#";
+        }
 
         // I think I could replace this with event delegation
         $(item).click(events[i], function(eventObject) {
@@ -174,9 +145,16 @@ function getEvents(page) {
                 console.log(err);
             }
         });
-
-
+        storedEvents[i].marker = addMarker(event, "yellow");
+        counter++;
     };
+    // Hide all the boxes
+    while ( counter < items.length ){
+        console.log(counter)
+        items[counter].hide();
+        counter++;
+    }
+    populateMarkers(storedEvents);
 };
 
 
@@ -186,15 +164,17 @@ function queryURLFiller(typeEvent, startDate, price, size, page){
     if (typeEvent !== "undefined"){
         queryURL += `&classificationName=${typeEvent}`
     };
+    console.log(startDate);
+    console.log(price);
     // if (startDate !== "0"){
     // var arr = ["2020-03-03","2020-05-20"]
     // "2020-01-12T23:40:00Z"
     // queryURL += `&startDateTime=${}`; //&endDateTime=${};
     // queryURL += `&endDateTime=${}`;
     // };
-    queryURL += `&city=${city}`;
-    queryURL += `&size=${size}&page=${page}`;
     console.log(queryURL);
+    queryURL += `&size=${size}&page=${page}`;
+    queryURL += `&city=${city}`;
     return queryURL;
 };
 
@@ -242,6 +222,13 @@ function renderTile(storedEvent, item){
     $(item).show();
 };
 
+function populateMarkers(storedEvents){
+    for (event in storedEvents){
+        console.log(storedEvents[event]);
+        storedEvents[event].marker.setMap(map);
+        
+    };
+};
 
 
 
@@ -262,3 +249,41 @@ $("#events").on("click", ".list-group-item", function(event){
         console.log(err);
     }
 })
+
+
+// Google Maps Implementation
+
+// function getLocation() {
+//     if (navigator.geolocation) {
+//         navigator.geolocation.getCurrentPosition(showPosition, showError);
+//     } else {
+//         var x = document.getElementById("location");
+//         x.innerHTML = "Geolocation is not supported by this browser.";
+//     }
+// }
+
+function initMap() {
+    // The location of Denver
+    var denver = {lat: 39.7392, lng: -104.9903};
+    // The map, centered on Denver
+    var map = new google.maps.Map(
+        document.getElementById('map'), {zoom: 10, center: denver});
+    // The marker, positioned at Uluru
+    var marker = new google.maps.Marker({position: denver, map: map});
+  }
+
+
+function addMarker(event, color) {
+    console.log(event._embedded.venues[0].location.latitude)
+  var marker = new google.maps.Marker({
+    position: new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude),
+    title: event.name
+  });
+
+  marker.setIcon(`http://maps.google.com/mapfiles/ms/icons/${color}-dot.png`);
+  return marker;
+}
+
+
+
+// getLocation();

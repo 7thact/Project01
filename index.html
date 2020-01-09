@@ -27,6 +27,10 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    
+    <!-- <script src="https://maps.googleapis.com/maps/api/js" async defer></script> -->
+
     <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="icon" type="image/png" href="images/favicon.png">
@@ -58,13 +62,16 @@
                 <input type="submit" value="Submit">
             </form>
         </div>
-        <div class="four columns calendar">
+        <!-- <div class="four columns calendar">
             <div class="calender">
                 <iframe
                     src="https://calendar.google.com/calendar/embed?height=300&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=America%2FDenver&amp;src=ZmI3cmI1YnAzc2xlMjdxMmhsZTVmYTI2ZGtAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23B08B59&amp;color=%23227F63&amp;title=Date%20Night%20"
                     style="border:solid 1px #777" width="300" height="300" frameborder="0" scrolling="no">
                 </iframe>
             </div>
+        </div> -->
+        <div class="four columns map">
+            <div id="map"></div>
         </div>
     </div>
     <!-- Primary Page Layout
@@ -245,6 +252,9 @@
         </div> -->
 
 
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYVpgUMNSWXZ7qZmwkQN-d5KPe1OFV_KM&callback=initMap">
+    </script>
     <script src="lib/moment/moment.min.js"></script>
     <script src="script.js"></script>
 </body>
