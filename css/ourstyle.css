@@ -22,8 +22,12 @@
 
 h2 {
     text-align: center;
-    background-color: lightskyblue;
-    border-radius: 4px;
+    font-size: 3em;
+    color: white;
+    background-color: #33C3F0;
+    padding-top: 10px;
+    border: solid #33C3F0;
+    border-radius: 5px;
 }
 
 .searchForm {
@@ -51,31 +55,32 @@ h2 {
     flex-wrap: wrap;
 }
 
-.container {
-    border: 2px solid lightskyblue;
-    border-style: solid;
-    border-width: 2px 2px 2px 35px;
-    border-radius: 5px;
-    margin: 10px auto;
-    
+body {
+    /* background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Flag_of_Denver%2C_Colorado.svg/1200px-Flag_of_Denver%2C_Colorado.svg.png"); */
 }
 
-@media only screen and (max-width:600px) {
+.container {
+    border: 2px solid #33C3F0;
+    border-style: solid;
+    border-width: 2px 35px 2px 35px;
+    border-radius: 5px;
+    margin: 10px auto;   
+}
+
+/* @media only screen and (max-width:600px) {
     .container{
         display: block;
         width: 100%;
     }
-}
+} */
 
-
-
-.test3 {
+/* .test3 {
     display: -webkit-flex;
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    width: 100%;    
-}
+    width: 100%;
+} */
 
 /* .test1 {
     display: flex;
@@ -97,24 +102,58 @@ h2 {
     margin: auto;
 }
 
+#prev {
+    border-bottom: 2px solid white;
+}
+
+#next {
+    border-bottom: 2px solid white;
+}
+
 .eventItems {
     border-style: solid;
-    border-color: lightgrey;
+    border-color: lightgray;
     padding: 20px;
-    margin: 15px;
+    margin: 10px;
     border-radius: 10px;
+    background-color: #33C3F0;
    }
 
+.list-group-item {
+    color: black;
+}
+
 .panel {
-    background-color: lightskyblue;
+    background-color: #33C3F0;
     color: rgb(23, 87, 170);
     text-align: center;
     /* padding-left: 20px; */
 }
 
+#map {
+    height: 400px;
+    width: 100%;
+    background-color: brown;
+}
+
 /* .test4 {
     min-width: 300px;
 } */
+
+/* Larger than mobile
+@media (min-width: 400px) {}
+
+/* Larger than phablet */
+/* @media (min-width: 550px) {} */
+
+/* Larger than tablet */
+/* @media (min-width: 750px) {} */
+
+/* Larger than desktop */
+/* @media (min-width: 1000px) {} */
+
+/* Larger than Desktop HD */
+/* @media (min-width: 1200px) {} */ */
 
 /* @media screen and (min-width: 480px) {
     body {
