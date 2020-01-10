@@ -58,6 +58,7 @@ prevBtn.on("click", function(e){
 // API
 eventForm.on("submit", function(event){
     event.preventDefault();
+    storedEvents = {};
     price = $("#price").val();
     queryDate = $("#date").val();
     typeEvent = $("#segment").val();
@@ -104,19 +105,14 @@ function queryURLFiller(typeEvent, startDate, endDate, size, page){
     if (typeEvent !== "undefined"){
         queryURL += `&classificationName=${typeEvent}`
     };
-    console.log(startDate);
-    console.log(endDate);
-    // if (startDate !== "0"){
-    // var arr = ["2020-03-03","2020-05-20"]
-    // "2020-01-12T23:40:00Z"
-
+    // console.log(startDate);
+    // console.log(endDate);
     queryURL += `&startDateTime=${startDate}`; 
     queryURL += `&endDateTime=${endDate}`;
-    // queryURL += `&endDateTime=${}`;
-    // };
-    console.log(queryURL);
+    // console.log(queryURL);
     queryURL += `&size=${size}&page=${page}`;
     queryURL += `&city=${city}`;
+    queryURL += `&sort=date,asc`;
     return queryURL;
 };
 
@@ -148,11 +144,10 @@ function getEvents(page) {
 function showEvents(json) {
     var items = $('#events .list-group-item'); // Targeting our HTML
     var events = json._embedded.events; // Events from the call
-    console.log(events);
+    // console.log(events);
     container.show();
     var counter = 0
     var queryStart = Object.keys(storedEvents).length;
-    console.log(queryStart);
     for (var i = queryStart; i < queryStart + events.length; i++) {
         var item = items[counter];
         var event = events[i];
@@ -186,7 +181,7 @@ function showEvents(json) {
     };
     // Hide all the boxes
     while ( counter < items.length ){
-        console.log(counter)
+        // console.log(counter)
         $(items[counter]).parent().hide();
         counter++;
     }
