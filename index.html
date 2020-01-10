@@ -45,32 +45,50 @@
     <div class="row formRow">
         <div class="four columns searchForm">
             <form action="/action_page.php">
-                <label for="price">Price</label>
-                <input type="text" id="price" name="price" placeholder="Maximum Price">
-
-                <label for="date">Date</label>
-                <input type="text" id="date" name="date" placeholder="MM-DD-YYYY">
-
+                <!-- <label for="price">Price</label>
+                <input type="text" id="price" name="price" placeholder="Maximum Price"> -->
+                <div class="row">
+                    <div class="columns dateForm">
+                        <label for="endYear">Start</label>
+                        <select id="startYear" name="Year">
+                            <option value="year">Year</option>
+                        </select>
+                        <select id="startMonth" name="Month">
+                            <option value="month">Month</option>
+                        </select>
+                        <select id="startDay" name="Day">
+                            <option value="day">Day</option>
+                        </select> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="columns dateForm">
+                        <label for="endYear">End</label>
+                        <select id="endYear" name="Year">
+                            <option value="year">Year</option>
+                        </select>
+                        <select id="endMonth" name="Month">
+                            <option value="month">Month</option>
+                        </select>
+                        <select id="endDay" name="Day">
+                            <option value="day">Day</option>
+                        </select>
+                    </div>
+                </div>
+                
                 <label for="segment">Event Type</label>
                 <select id="segment" name="segment">
-                    <option value="music">music</option>
-                    <option value="sports">sports</option>
-                    <option value="film">film</option>
-                    <option value="family">family</option>
-                    <option value="miscellaneous">miscellaneous</option>
+                    <option value="undefined">Undefined</option>
+                    <option value="music">Music</option>
+                    <option value="sports">Sports</option>
+                    <option value="film">Film</option>
+                    <option value="family">Family</option>
+                    <option value="miscellaneous">Miscellaneous</option>
                 </select>
 
                 <input type="submit" value="Submit">
             </form>
         </div>
-        <!-- <div class="four columns calendar">
-            <div class="calender">
-                <iframe
-                    src="https://calendar.google.com/calendar/embed?height=300&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=America%2FDenver&amp;src=ZmI3cmI1YnAzc2xlMjdxMmhsZTVmYTI2ZGtAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%23B08B59&amp;color=%23227F63&amp;title=Date%20Night%20"
-                    style="border:solid 1px #777" width="300" height="300" frameborder="0" scrolling="no">
-                </iframe>
-            </div>
-        </div> -->
         <div class="four columns map">
             <div id="map"></div>
         </div>
