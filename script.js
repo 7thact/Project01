@@ -22,6 +22,9 @@ var size = 10; // Make this dynamic
 var storedEvents = {};
 var city = "denver";
 
+// Google Variables
+var latLng;
+
 
 // Event Listeners
 nextBtn.on("click", function(e){
@@ -79,6 +82,8 @@ function init(){
     h1.text("Plan a date")
     container.hide();
     momentConfig();
+    getLocation();
+
 };
 
 init();
@@ -145,7 +150,7 @@ function showEvents(json) {
                 console.log(err);
             }
         });
-        storedEvents[i].marker = addMarker(event, "yellow");
+        storedEvents[i].marker = createMarker(event, "yellow");
         counter++;
     };
     // Hide all the boxes
@@ -223,11 +228,20 @@ function renderTile(storedEvent, item){
 };
 
 function populateMarkers(storedEvents){
+    console.log(latLng);
+    var map = new google.maps.Map(
+        document.getElementById('map'), {
+            zoom: 10, 
+            center: {lat: latLng[0], lng: latLng[1]},
+        });
     for (event in storedEvents){
         console.log(storedEvents[event]);
-        storedEvents[event].marker.setMap(map);
-        
+        storedEvents[event].marker.setMap(map);    
     };
+    var marker = new google.maps.Marker({
+        position: {lat: lat, lng: lng},
+        map: map,
+    });
 };
 
 
@@ -261,24 +275,59 @@ $("#events").on("click", ".list-group-item", function(event){
 //         x.innerHTML = "Geolocation is not supported by this browser.";
 //     }
 // }
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(initMap, showError);
+    } else {
+        var x = document.getElementById("location");
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
 
-function initMap() {
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            x.innerHTML = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            x.innerHTML = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            x.innerHTML = "An unknown error occurred."
+            break;
+    }
+}
+
+function initMap(position) {
     // The location of Denver
-    var denver = {lat: 39.7392, lng: -104.9903};
+    // var denver = {lat: 39.7392, lng: -104.9903};
     // The map, centered on Denver
+    lat = position.coords.latitude;
+    lng = position.coords.longitude;
     var map = new google.maps.Map(
-        document.getElementById('map'), {zoom: 10, center: denver});
-    // The marker, positioned at Uluru
-    var marker = new google.maps.Marker({position: denver, map: map});
+        document.getElementById('map'), {
+            zoom: 10, 
+            center: {lat: lat, lng: lng},
+        });
+    var marker = new google.maps.Marker({
+        position: {lat: lat, lng: lng},
+        map: map,
+    });
+    latLng = [lat, lng];
   }
 
 
-function addMarker(event, color) {
+function createMarker(event, color) {
     console.log(event._embedded.venues[0].location.latitude)
   var marker = new google.maps.Marker({
     position: new google.maps.LatLng(event._embedded.venues[0].location.latitude, event._embedded.venues[0].location.longitude),
-    title: event.name
+    title: event.name,
+    animation: google.maps.Animation.DROP
   });
+//   marker.addListener()
 
   marker.setIcon(`http://maps.google.com/mapfiles/ms/icons/${color}-dot.png`);
   return marker;
