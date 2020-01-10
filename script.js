@@ -83,13 +83,16 @@ function dateFormater(time){
     var day = $(`#${time}Day`).val();
     var month = $(`#${time}Month`).val();
     var year = $(`#${time}Year`).val();
-    if(day === "day"){
+    if (day === "day"){
         day = now.format("DD");
+        if (time === "end"){
+            day = now.add(1, 'd').format("DD");
+        };
     };
-    if(month === "month"){
+    if (month === "month"){
         month = now.format("MM");
     };
-    if(year === "year"){
+    if (year === "year"){
         year = now.format("YYYY");
     };
     var result = year + "-" + month + "-" + day;
@@ -107,8 +110,8 @@ function queryURLFiller(typeEvent, startDate, endDate, size, page){
     // var arr = ["2020-03-03","2020-05-20"]
     // "2020-01-12T23:40:00Z"
 
-    queryURL += `&startDateTime=2020-03-09T00:00:00Z`; 
-    queryURL += `&endDateTime=2020-03-19T00:00:00Z`;
+    queryURL += `&startDateTime=${startDate}`; 
+    queryURL += `&endDateTime=${endDate}`;
     // queryURL += `&endDateTime=${}`;
     // };
     console.log(queryURL);
@@ -168,25 +171,23 @@ function showEvents(json) {
         } catch (err) {
             storedEvents[i].attraction = "#";
         }
-
-        // I think I could replace this with event delegation
-        $(item).click(events[i], function(eventObject) {
-
-            console.log(eventObject.data);
-            try {
-                console.log(eventObject.data._embedded.attractions[0].id);
-                // getAttraction(eventObject.data._embedded.attractions[0].id);
-            } catch (err) {
-                console.log(err);
-            }
-        });
+        try {
+            $(item).attr({
+                "href": storedEvents[i].attraction.url,
+                "target": "_blank",
+                "rel": "noopener"
+            });
+        } catch (err) {
+            $(item).attr("href", "#");
+            console.log(err);
+        }
         storedEvents[i].marker = createMarker(event, "yellow");
         counter++;
     };
     // Hide all the boxes
     while ( counter < items.length ){
         console.log(counter)
-        items[counter].hide();
+        $(items[counter]).parent().hide();
         counter++;
     }
     populateMarkers(storedEvents);
@@ -306,14 +307,8 @@ function populateMarkers(storedEvents){
 
 // Initialization
 function momentConfig(){
-    now = moment();
-    
+    now = moment();    
     nowUTC = now.utc(String).format();
-    nowDateTime = now.format("LLLL");
-    // Find out what format the query takes
-    console.log(nowDateTime);
-    // currentHour = now.format("kk")
-    // now.format("ddd, Do MMMM, YYYY"));
 }
 
 function init(){
@@ -327,20 +322,3 @@ function init(){
 };
 
 init();
-
-
-// NOT YET IMPLEMENTED
-// $("#events").on("click", ".list-group-item", function(event){
-//     event.preventDefault();
-//     var eventClicked = $(this);
-//     console.log("Event clicked: ");
-//     console.log(eventClicked);
-//     try {
-//         console.log(storedEvents[index]["attractionObj"].id) // How will I get the index?
-//         // idea: We search through the key indices in storedEvents.
-//         // In the indices we see if the key "heading" === $(this).children()
-//         // getAttraction(eventObject.data._embedded.attractions[0].id);
-//     } catch (err) {
-//         console.log(err);
-//     }
-// })
