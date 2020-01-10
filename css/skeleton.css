@@ -288,7 +288,14 @@ label > .label-body {
   margin-left: .5rem;
   font-weight: normal; }
 
-
+.dateForm > label {
+  display: block;
+  margin: 0 0 15px;
+  font-weight: bold;
+  padding: 6px 10px;
+  background-color: #ccc;
+  border-radius: 4px;
+}
 /* Lists
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 ul {
